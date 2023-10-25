@@ -12,3 +12,4 @@ Image generator designed to inspire architects
 - NLW AI [Rocketseat](https://rocketseat.com.br)
 - [Construindo a API do seu próprio ChatGPT](https://youtube.com)
 - [React Js com TypeScript do zero ao avançado na pratica](https://www.udemy.com/course/react-js-typescript/)
+- [Design Engineering: UI para front-ends (Figma ao React)](https://www.youtube.com/watch?v=h2lSz8RqkF0)
