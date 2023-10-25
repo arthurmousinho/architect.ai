@@ -28,6 +28,7 @@ export function Ideias() {
 
     const [loading, setLoading] = useState(false);
     const [images, setImages] = useState<ImageResult[]>([]);
+
     
     function allInputsValid() {
         const fields = [type, style,elements ,materials, weather];
@@ -37,7 +38,9 @@ export function Ideias() {
     async function getImages(generationData: GenerationImageData) {
         try {
             const response = await axios.post("http://localhost:4000/generate", generationData);
-            setImages(response.data);
+            if (Array.isArray(response.data)) {
+                setImages(response.data);
+            }
         } catch (error) {
             alert("Ocorreu um erro, tente novamente");
         } finally {
@@ -137,13 +140,22 @@ export function Ideias() {
 
             </Card>
 
-            <div className="w-[95vw] lg:w-[1136px] flex flex-col lg:flex-row flex-wrap gap-6 items-center justify-center mt-10 mb-10 bg-black">
+            <div className="w-[95vw] lg:w-[1136px] flex flex-col lg:flex-row flex-wrap gap-6 items-center justify-center mt-10 mb-10">
                 {
-                    images.map(img => {
-                        return (
-                            <img src={`${img.url}`} alt="" className="hover:scale-105 transition-transform w-auto md:w-[512px]"/>
-                        )
-                    })
+                    loading ? (
+                        <>
+                            <div className="w-[512px] h-[512px] bg-gray-950"></div>
+                            <div className="w-[512px] h-[512px] bg-gray-950"></div>
+                            <div className="w-[512px] h-[512px] bg-gray-950"></div>
+                            <div className="w-[512px] h-[512px] bg-gray-950"></div>
+                        </>
+                    ) : (
+                        images.map(img => {
+                            return (
+                                <img src={`${img.url}`} key={img.url} className="hover:scale-105 transition-transform w-auto md:w-[512px]"/>
+                            )
+                        })
+                    )
                 }
             </div>
 
